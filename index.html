@@ -1,0 +1,119 @@
+<!doctype html>
+<html lang="es">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>KWGTHub</title>
+        <link rel="stylesheet" href="styles.css" />
+        <link
+            rel="stylesheet"
+            href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css"
+        />
+    </head>
+    <body>
+        <!-- NAVBAR -->
+        <nav class="nav">
+            <div class="nav-logo">kwgt<span>hub</span></div>
+            <div class="nav-links">
+                <a class="nav-link" href="#">Explorar</a>
+                <a class="nav-link" href="#">Creadores</a>
+                <a class="nav-link" href="#">Subir widget</a>
+                <button id="dark-toggle" class="icon-btn" title="Cambiar tema">
+                    <i class="ti ti-moon"></i>
+                </button>
+                <button class="nav-btn">Iniciar sesión</button>
+            </div>
+        </nav>
+
+        <!-- HERO / BÚSQUEDA -->
+        <section class="hero">
+            <h1>Encuentra el widget perfecto para tu pantalla</h1>
+            <p>
+                Miles de widgets KWGT creados por la comunidad, gratis y listos
+                para descargar.
+            </p>
+            <div class="search-bar">
+                <input
+                    id="search-input"
+                    class="search-input"
+                    type="text"
+                    placeholder="Buscar widgets... ej. reloj minimalista"
+                />
+                <button id="search-btn" class="search-btn">
+                    <i class="ti ti-search"></i> Buscar
+                </button>
+            </div>
+            <div class="filters">
+                <div class="filter-chip active" data-category="todos">
+                    Todos
+                </div>
+                <div class="filter-chip" data-category="reloj">Reloj</div>
+                <div class="filter-chip" data-category="calendario">
+                    Calendario
+                </div>
+                <div class="filter-chip" data-category="clima">Clima</div>
+                <div class="filter-chip" data-category="musica">Música</div>
+                <div class="filter-chip" data-category="salud">Salud</div>
+                <div class="filter-chip" data-category="bateria">Batería</div>
+            </div>
+        </section>
+
+        <!-- CONTENIDO PRINCIPAL -->
+        <div class="content">
+            <!-- SIDEBAR -->
+            <aside class="sidebar">
+                <h3>Categorías</h3>
+                <div class="sidebar-item active" data-category="todos">
+                    <i class="ti ti-layout-grid"></i> Todos
+                    <span class="badge">8</span>
+                </div>
+                <div class="sidebar-item" data-category="reloj">
+                    <i class="ti ti-clock"></i> Reloj
+                    <span class="badge">1</span>
+                </div>
+                <div class="sidebar-item" data-category="calendario">
+                    <i class="ti ti-calendar"></i> Calendario
+                    <span class="badge">1</span>
+                </div>
+                <div class="sidebar-item" data-category="clima">
+                    <i class="ti ti-cloud"></i> Clima
+                    <span class="badge">2</span>
+                </div>
+                <div class="sidebar-item" data-category="musica">
+                    <i class="ti ti-music"></i> Música
+                    <span class="badge">2</span>
+                </div>
+                <div class="sidebar-item" data-category="salud">
+                    <i class="ti ti-activity"></i> Salud
+                    <span class="badge">1</span>
+                </div>
+                <div class="sidebar-item" data-category="bateria">
+                    <i class="ti ti-battery"></i> Batería
+                    <span class="badge">1</span>
+                </div>
+
+                <h3 class="sidebar-section-title">Ordenar por</h3>
+                <div class="sidebar-item active-sort">
+                    <i class="ti ti-flame"></i> Populares
+                </div>
+                <div class="sidebar-item">
+                    <i class="ti ti-clock"></i> Recientes
+                </div>
+                <div class="sidebar-item">
+                    <i class="ti ti-download"></i> Más descargados
+                </div>
+            </aside>
+
+            <!-- GRID -->
+            <main class="main">
+                <div class="section-header">
+                    <span class="section-title">Populares esta semana</span>
+                    <span class="see-all">Ver todos</span>
+                </div>
+                <div class="grid" id="widget-grid"></div>
+            </main>
+        </div>
+
+        <script src="app.js"></script>
+    </body>
+</html>

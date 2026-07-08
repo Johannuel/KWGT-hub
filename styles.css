@@ -1,0 +1,655 @@
+/* ================================
+   RESET Y BASE
+================================ */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: "Segoe UI", Arial, sans-serif;
+    background-color: #f5f5f5;
+    color: #1a1a1a;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+/* ================================
+   NAVBAR
+================================ */
+.nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 14px 24px;
+    border-bottom: 1px solid #e0e0e0;
+    background: #ffffff;
+}
+
+.nav-logo {
+    font-size: 20px;
+    font-weight: 600;
+    color: #1a1a1a;
+    letter-spacing: -0.5px;
+}
+
+.nav-logo span {
+    color: #3b7de8;
+}
+
+.nav-links {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+}
+
+.nav-link {
+    font-size: 14px;
+    color: #666;
+    cursor: pointer;
+}
+
+.nav-link:hover {
+    color: #3b7de8;
+}
+
+.nav-btn {
+    font-size: 13px;
+    background: #3b7de8;
+    color: #ffffff;
+    border: none;
+    border-radius: 8px;
+    padding: 7px 16px;
+    cursor: pointer;
+}
+
+.nav-btn:hover {
+    background: #2c6ed4;
+}
+
+/* ================================
+   HERO / BÚSQUEDA
+================================ */
+.hero {
+    padding: 40px 24px 28px;
+    background: #fafafa;
+    border-bottom: 1px solid #e0e0e0;
+}
+
+.hero h1 {
+    font-size: 26px;
+    font-weight: 600;
+    color: #1a1a1a;
+    margin-bottom: 8px;
+}
+
+.hero p {
+    font-size: 14px;
+    color: #666;
+    margin-bottom: 20px;
+}
+
+.search-bar {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    max-width: 600px;
+}
+
+.search-input {
+    flex: 1;
+    padding: 10px 14px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-size: 14px;
+    background: #ffffff;
+    color: #1a1a1a;
+    outline: none;
+}
+
+.search-input:focus {
+    border-color: #3b7de8;
+}
+
+.search-btn {
+    padding: 10px 18px;
+    background: #3b7de8;
+    color: #ffffff;
+    border: none;
+    border-radius: 8px;
+    font-size: 14px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.search-btn:hover {
+    background: #2c6ed4;
+}
+
+/* ================================
+   FILTROS
+================================ */
+.filters {
+    display: flex;
+    gap: 8px;
+    margin-top: 16px;
+    flex-wrap: wrap;
+}
+
+.filter-chip {
+    padding: 5px 14px;
+    border-radius: 20px;
+    font-size: 12px;
+    cursor: pointer;
+    border: 1px solid #ddd;
+    background: #ffffff;
+    color: #666;
+}
+
+.filter-chip:hover {
+    border-color: #3b7de8;
+    color: #3b7de8;
+}
+
+.filter-chip.active {
+    background: #e8f0fe;
+    color: #3b7de8;
+    border-color: #3b7de8;
+}
+
+/* ================================
+   LAYOUT PRINCIPAL
+================================ */
+.content {
+    display: flex;
+}
+
+/* ================================
+   SIDEBAR
+================================ */
+.sidebar {
+    width: 210px;
+    min-width: 210px;
+    padding: 20px 16px;
+    border-right: 1px solid #e0e0e0;
+    background: #ffffff;
+}
+
+.sidebar h3 {
+    font-size: 11px;
+    font-weight: 600;
+    color: #aaa;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    margin-bottom: 10px;
+}
+
+.sidebar-section-title {
+    font-size: 11px;
+    font-weight: 600;
+    color: #aaa;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    margin-top: 24px;
+    margin-bottom: 10px;
+}
+
+.sidebar-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 7px 10px;
+    border-radius: 8px;
+    font-size: 13px;
+    color: #555;
+    cursor: pointer;
+    margin-bottom: 2px;
+}
+
+.sidebar-item:hover {
+    background: #f0f0f0;
+}
+
+.sidebar-item.active {
+    background: #e8f0fe;
+    color: #3b7de8;
+}
+
+.sidebar-item i {
+    font-size: 15px;
+}
+
+.badge {
+    font-size: 11px;
+    margin-left: auto;
+    background: #f0f0f0;
+    color: #888;
+    padding: 1px 7px;
+    border-radius: 10px;
+}
+
+/* ================================
+   SECCIÓN PRINCIPAL
+================================ */
+.main {
+    flex: 1;
+    padding: 0 0 40px;
+}
+
+.section-header {
+    padding: 20px 20px 8px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.section-title {
+    font-size: 15px;
+    font-weight: 600;
+    color: #1a1a1a;
+}
+
+.see-all {
+    font-size: 12px;
+    color: #3b7de8;
+    cursor: pointer;
+}
+
+.see-all:hover {
+    text-decoration: underline;
+}
+
+/* ================================
+   GRID DE TARJETAS
+================================ */
+.grid {
+    padding: 12px 20px;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(170px, 1fr));
+    gap: 14px;
+}
+
+/* ================================
+   TARJETA DE WIDGET
+================================ */
+.widget-card {
+    background: #ffffff;
+    border: 1px solid #e0e0e0;
+    border-radius: 12px;
+    overflow: hidden;
+    cursor: pointer;
+    transition:
+        border-color 0.15s,
+        box-shadow 0.15s;
+}
+
+.widget-card:hover {
+    border-color: #3b7de8;
+    box-shadow: 0 2px 10px rgba(59, 125, 232, 0.1);
+}
+
+/* ================================
+   VISTA PREVIA DEL WIDGET
+================================ */
+.widget-preview {
+    height: 110px;
+    background: #f0f0f0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Teléfono base */
+.phone-frame {
+    width: 64px;
+    height: 92px;
+    border: 2px solid #555;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 3px;
+    overflow: hidden;
+    padding: 6px;
+}
+
+.phone-dark-blue {
+    background: #1a1a2e;
+}
+.phone-dark {
+    background: #0d1117;
+}
+.phone-warm {
+    background: #1c1410;
+}
+.phone-black {
+    background: #0f0f0f;
+}
+
+/* Contenido teléfono 1 - reloj */
+.widget-time {
+    font-size: 13px;
+    font-weight: 600;
+    color: #e0e0ff;
+}
+
+.widget-date {
+    font-size: 7px;
+    color: #9090c0;
+}
+
+.widget-bar {
+    width: 44px;
+    height: 3px;
+    background: #4444aa;
+    border-radius: 2px;
+}
+
+/* Contenido teléfono 2 - salud */
+.circle-widget {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.circle-ring {
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    border: 3px solid #22c55e;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 8px;
+    color: #22c55e;
+    font-weight: 600;
+}
+
+.phone-label {
+    font-size: 7px;
+    color: #666;
+}
+
+.phone-label.small {
+    font-size: 6px;
+    color: #444;
+}
+
+/* Contenido teléfono 3 - clima */
+.weather-icon {
+    font-size: 14px;
+}
+.weather-temp {
+    font-size: 20px;
+    font-weight: 300;
+    color: #fbbf24;
+}
+.weather-desc {
+    font-size: 6px;
+    color: #888;
+    text-align: center;
+}
+
+/* Contenido teléfono 4 - música */
+.music-song {
+    font-size: 7px;
+    color: #ffffff;
+    font-weight: 600;
+    text-align: center;
+}
+.music-artist {
+    font-size: 6px;
+    color: #888;
+}
+
+.music-progress {
+    width: 44px;
+    height: 2px;
+    background: #333;
+    border-radius: 2px;
+    margin: 2px 0;
+}
+
+.music-progress-fill {
+    width: 55%;
+    height: 100%;
+    background: #1db954;
+    border-radius: 2px;
+}
+
+.music-controls {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    font-size: 10px;
+    color: #aaa;
+}
+
+.music-play {
+    font-size: 13px;
+    color: #1db954;
+}
+
+/* ================================
+   INFO DE LA TARJETA
+================================ */
+.widget-info {
+    padding: 10px 12px;
+}
+
+.widget-title {
+    font-size: 13px;
+    font-weight: 600;
+    color: #1a1a1a;
+    margin-bottom: 4px;
+}
+
+.widget-meta {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.creator-name {
+    font-size: 11px;
+    color: #3b7de8;
+}
+
+.widget-stats {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+}
+
+.stat {
+    font-size: 11px;
+    color: #aaa;
+    display: flex;
+    align-items: center;
+    gap: 2px;
+}
+
+.stat i {
+    font-size: 11px;
+}
+
+.tag {
+    display: inline-block;
+    font-size: 10px;
+    padding: 2px 8px;
+    background: #e8f0fe;
+    color: #3b7de8;
+    border-radius: 10px;
+    margin-top: 6px;
+}
+
+/* ================================
+   DARK MODE
+================================ */
+body.dark {
+    background-color: #111111;
+    color: #e0e0e0;
+}
+
+body.dark .nav {
+    background: #1a1a1a;
+    border-bottom-color: #2a2a2a;
+}
+
+body.dark .nav-logo {
+    color: #e0e0e0;
+}
+body.dark .nav-link {
+    color: #aaa;
+}
+body.dark .nav-link:hover {
+    color: #5a9cf8;
+}
+
+body.dark .hero {
+    background: #161616;
+    border-bottom-color: #2a2a2a;
+}
+
+body.dark .hero h1 {
+    color: #e0e0e0;
+}
+body.dark .hero p {
+    color: #aaa;
+}
+
+body.dark .search-input {
+    background: #1e1e1e;
+    border-color: #333;
+    color: #e0e0e0;
+}
+
+body.dark .search-input:focus {
+    border-color: #5a9cf8;
+}
+
+body.dark .filter-chip {
+    background: #1e1e1e;
+    border-color: #333;
+    color: #aaa;
+}
+
+body.dark .filter-chip.active {
+    background: #1a2a4a;
+    color: #5a9cf8;
+    border-color: #5a9cf8;
+}
+
+body.dark .sidebar {
+    background: #1a1a1a;
+    border-right-color: #2a2a2a;
+}
+
+body.dark .sidebar h3,
+body.dark .sidebar-section-title {
+    color: #555;
+}
+
+body.dark .sidebar-item {
+    color: #aaa;
+}
+body.dark .sidebar-item:hover {
+    background: #222;
+}
+body.dark .sidebar-item.active {
+    background: #1a2a4a;
+    color: #5a9cf8;
+}
+
+body.dark .badge {
+    background: #222;
+    color: #666;
+}
+
+body.dark .widget-card {
+    background: #1a1a1a;
+    border-color: #2a2a2a;
+}
+
+body.dark .widget-card:hover {
+    border-color: #5a9cf8;
+    box-shadow: 0 2px 10px rgba(90, 156, 248, 0.1);
+}
+
+body.dark .widget-preview {
+    background: #111;
+}
+body.dark .widget-title {
+    color: #e0e0e0;
+}
+body.dark .section-title {
+    color: #e0e0e0;
+}
+
+body.dark .tag {
+    background: #1a2a4a;
+    color: #5a9cf8;
+}
+
+body.dark .icon-btn {
+    background: #222;
+    border-color: #333;
+    color: #aaa;
+}
+
+/* ================================
+   DARK MODE TOGGLE BUTTON
+================================ */
+.icon-btn {
+    background: #f0f0f0;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 6px 10px;
+    cursor: pointer;
+    font-size: 16px;
+    color: #555;
+    display: flex;
+    align-items: center;
+    transition: background 0.2s;
+}
+
+.icon-btn:hover {
+    background: #e0e0e0;
+}
+
+/* ================================
+   ANIMACIONES HOVER EN TARJETAS
+================================ */
+.widget-card {
+    transition:
+        border-color 0.15s,
+        box-shadow 0.2s,
+        transform 0.2s;
+}
+
+.widget-card:hover {
+    transform: translateY(-3px);
+}
+
+.widget-card.card-clicked {
+    transform: scale(0.97);
+    transition: transform 0.1s;
+}
+
+/* ================================
+   ESTADO VACÍO
+================================ */
+.empty-state {
+    grid-column: 1 / -1;
+    padding: 48px 20px;
+    text-align: center;
+    font-size: 14px;
+    color: #888;
+}
