@@ -198,7 +198,7 @@ searchInput.addEventListener("keydown", (e) => {
   }
 });
 
-// FILTROS (chips en el hero)
+// Filtros chips en el hero
 
 const filterChips = document.querySelectorAll(".filter-chip");
 
@@ -212,7 +212,7 @@ filterChips.forEach((chip) => {
   });
 });
 
-// SIDEBAR
+// Sidebar
 
 const sidebarItems = document.querySelectorAll(".sidebar-item[data-category]");
 
