@@ -123,9 +123,7 @@ const previews = {
     </div>`,
 };
 
-// ================================
 // RENDERIZAR TARJETAS
-// ================================
 function renderWidgets(list) {
   const grid = document.getElementById("widget-grid");
 
