@@ -82,15 +82,11 @@ const widgets = [
   },
 ];
 
-// ================================
 // ESTADO DE LA APP
-// ================================
 let activeCategory = "todos";
 let searchQuery = "";
 
-// ================================
 // PREVIEWS HTML POR TIPO
-// ================================
 const previews = {
   "preview-clock": `
     <div class="phone-frame phone-dark-blue">
@@ -162,9 +158,6 @@ function renderWidgets(list) {
     .join("");
 }
 
-// ================================
-// FILTRAR WIDGETS
-// ================================
 function filterWidgets() {
   let result = widgets;
 
@@ -185,9 +178,8 @@ function filterWidgets() {
   renderWidgets(result);
 }
 
-// ================================
 // BÚSQUEDA
-// ================================
+
 const searchInput = document.getElementById("search-input");
 const searchBtn = document.getElementById("search-btn");
 
@@ -208,9 +200,8 @@ searchInput.addEventListener("keydown", (e) => {
   }
 });
 
-// ================================
 // FILTROS (chips en el hero)
-// ================================
+
 const filterChips = document.querySelectorAll(".filter-chip");
 
 filterChips.forEach((chip) => {
@@ -223,9 +214,8 @@ filterChips.forEach((chip) => {
   });
 });
 
-// ================================
 // SIDEBAR
-// ================================
+
 const sidebarItems = document.querySelectorAll(".sidebar-item[data-category]");
 
 sidebarItems.forEach((item) => {
@@ -250,9 +240,7 @@ function syncChips(category) {
   });
 }
 
-// ================================
 // DARK MODE
-// ================================
 const darkToggle = document.getElementById("dark-toggle");
 const icon = darkToggle.querySelector("i");
 
@@ -269,10 +257,8 @@ if (localStorage.getItem("theme") === "dark") {
   icon.className = "ti ti-sun";
 }
 
-// ================================
 // ANIMACIONES HOVER EN TARJETAS
 // (se aplican via CSS, aquí manejamos el click)
-// ================================
 document.getElementById("widget-grid").addEventListener("click", (e) => {
   const card = e.target.closest(".widget-card");
   if (!card) return;
@@ -280,7 +266,5 @@ document.getElementById("widget-grid").addEventListener("click", (e) => {
   setTimeout(() => card.classList.remove("card-clicked"), 300);
 });
 
-// ================================
 // INIT
-// ================================
 renderWidgets(widgets);
