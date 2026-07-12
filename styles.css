@@ -2,33 +2,36 @@
    VARIABLES (THEMING)
 ================================ */
 :root {
-    --bg-color: #050505;
-    --text-color: #f0f0f0;
-    --text-muted: #a0a0a0;
-    --primary-color: #ff00ff; /* Acid Magenta */
-    --primary-hover: #ff33ff;
+    --bg-color: #0a0a0c;
+    --text-color: #e2e8f0;
+    --text-muted: #94a3b8;
+    /* Vibrant but balanced Neon Accents */
+    --primary-color: #3b82f6; /* Modern Vibrant Blue */
+    --primary-hover: #60a5fa;
 
-    /* Bold Neon Aesthetics */
-    --glass-bg: rgba(20, 20, 20, 0.8);
-    --glass-border: rgba(255, 0, 255, 0.3);
-    --glass-shadow: 0 0 20px rgba(255, 0, 255, 0.2);
-    --glass-blur: blur(8px);
+    /* Professional Glass/Neon Aesthetics */
+    --glass-bg: rgba(30, 41, 59, 0.6);
+    --glass-border: rgba(59, 130, 246, 0.3);
+    --glass-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+    --glass-blur: blur(16px);
 
-    --card-bg: rgba(25, 25, 25, 0.9);
-    --card-border: rgba(0, 255, 255, 0.2);
+    --card-bg: rgba(15, 23, 42, 0.7);
+    --card-border: rgba(255, 255, 255, 0.05);
 
-    --tag-bg: rgba(255, 0, 255, 0.2);
-    --tag-color: #ff00ff;
+    --tag-bg: rgba(59, 130, 246, 0.2);
+    --tag-color: #60a5fa;
 }
 
 body {
-    /* Stylized font for 'melted' feel - attempting to simulate with shadow */
-    font-family: "Impact", "Arial Black", sans-serif;
-    text-shadow:
-        1px 1px 0 #00ffff,
-        -1px -1px 0 #ff00ff;
+    /* Clean, highly legible geometric font */
+    font-family:
+        "Inter",
+        system-ui,
+        -apple-system,
+        sans-serif;
     background-color: var(--bg-color);
     color: var(--text-color);
+    text-shadow: none; /* Removed 'melted' effect */
 }
 
 /* ================================
