@@ -1,155 +1,794 @@
 /* ================================
-   NIKE 2000s TECHWEAR (Y2K) - ROOT
+   VARIABLES (THEMING)
 ================================ */
 :root {
-    --bg-color: #1a1a1a;
-    --card-bg: #2a2a2a;
-    --text-color: #ffffff;
-    --text-muted: #a0a0a0;
-    --accent-color: #ff5e00; /* Nike Orange/Volt */
-    --border-color: #444444;
-    --font-stack: "Inter", "Helvetica Neue", Arial, sans-serif;
-    --italic-font: "Italic", sans-serif;
+    --bg-color: #f1f3f7;
+    --text-color: #1a1a1a;
+    --text-muted: #64748b;
+    --primary-color: #3b7de8;
+    --primary-hover: #2c6ed4;
+
+    /* Glassmorphism Styles (Light Mode) */
+    --glass-bg: rgba(255, 255, 255, 0.45);
+    --glass-border: rgba(255, 255, 255, 0.4);
+    --glass-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.06);
+    --glass-blur: blur(12px);
+
+    --card-bg: rgba(255, 255, 255, 0.5);
+    --card-border: rgba(255, 255, 255, 0.45);
+
+    --sidebar-item-hover: rgba(255, 255, 255, 0.35);
+    --badge-bg: rgba(255, 255, 255, 0.5);
+    --badge-color: #64748b;
+    --tag-bg: rgba(59, 125, 232, 0.12);
+    --tag-color: #3b7de8;
+
+    --input-bg: rgba(255, 255, 255, 0.5);
+    --input-border: rgba(255, 255, 255, 0.5);
+    --chip-bg: rgba(255, 255, 255, 0.4);
+    --chip-active-bg: #3b7de8;
+    --chip-active-color: #ffffff;
+
+    --widget-preview-bg: rgba(0, 0, 0, 0.03);
 }
 
-body {
-    font-family: var(--font-stack);
-    background-color: var(--bg-color);
-    color: var(--text-color);
-    font-size: 14px;
+body.dark {
+    --bg-color: #0b0e14;
+    --text-color: #f1f5f9;
+    --text-muted: #94a3b8;
+    --primary-color: #5a9cf8;
+    --primary-hover: #4886e0;
+
+    /* Glassmorphism Styles (Dark Mode) */
+    --glass-bg: rgba(15, 20, 30, 0.45);
+    --glass-border: rgba(255, 255, 255, 0.06);
+    --glass-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.35);
+    --glass-blur: blur(16px);
+
+    --card-bg: rgba(22, 28, 38, 0.45);
+    --card-border: rgba(255, 255, 255, 0.06);
+
+    --sidebar-item-hover: rgba(255, 255, 255, 0.05);
+    --badge-bg: rgba(255, 255, 255, 0.05);
+    --badge-color: #94a3b8;
+    --tag-bg: rgba(90, 156, 248, 0.15);
+    --tag-color: #5a9cf8;
+
+    --input-bg: rgba(15, 20, 30, 0.45);
+    --input-border: rgba(255, 255, 255, 0.06);
+    --chip-bg: rgba(22, 28, 38, 0.45);
+    --chip-active-bg: #5a9cf8;
+    --chip-active-color: #0b0e14;
+
+    --widget-preview-bg: rgba(0, 0, 0, 0.25);
+}
+
+/* ================================
+   RESET Y BASE
+================================ */
+* {
+    box-sizing: border-box;
     margin: 0;
     padding: 0;
 }
 
+body {
+    font-family:
+        "Segoe UI",
+        system-ui,
+        -apple-system,
+        sans-serif;
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    min-height: 100vh;
+    transition:
+        background-color 0.4s,
+        color 0.4s;
+    overflow-x: hidden;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
 /* ================================
-   NAVBAR (MOBILE RESPONSIVE)
+   DECORATIVE BACKGROUND BLOBS
+================================ */
+.bg-blobs {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: -1;
+    overflow: hidden;
+    pointer-events: none;
+}
+
+.blob {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(140px);
+    opacity: 0.38;
+    transition:
+        background-color 0.5s ease,
+        opacity 0.5s ease;
+}
+
+.blob-1 {
+    top: -15%;
+    left: -10%;
+    width: 55vw;
+    height: 55vw;
+    background: radial-gradient(circle, #ff3b93 0%, rgba(255, 59, 147, 0) 70%);
+}
+
+.blob-2 {
+    bottom: -15%;
+    right: -10%;
+    width: 65vw;
+    height: 65vw;
+    background: radial-gradient(circle, #3b7de8 0%, rgba(59, 125, 232, 0) 70%);
+}
+
+.blob-3 {
+    top: 35%;
+    left: 40%;
+    width: 45vw;
+    height: 45vw;
+    background: radial-gradient(circle, #8b5cf6 0%, rgba(139, 92, 246, 0) 70%);
+}
+
+body.dark .blob-1 {
+    background: radial-gradient(circle, #ec4899 0%, rgba(236, 72, 153, 0) 70%);
+    opacity: 0.22;
+}
+
+body.dark .blob-2 {
+    background: radial-gradient(circle, #3b82f6 0%, rgba(59, 130, 246, 0) 70%);
+    opacity: 0.22;
+}
+
+body.dark .blob-3 {
+    background: radial-gradient(circle, #a855f7 0%, rgba(168, 85, 247, 0) 70%);
+    opacity: 0.22;
+}
+
+/* ================================
+   NAVBAR
 ================================ */
 .nav {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 15px 20px;
-    background: #111;
-    border-bottom: 2px solid var(--accent-color);
+    padding: 14px 28px;
+    border-bottom: 1px solid var(--glass-border);
+    background: var(--glass-bg);
+    backdrop-filter: var(--glass-blur);
+    -webkit-backdrop-filter: var(--glass-blur);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: var(--glass-shadow);
+    transition:
+        background 0.3s,
+        border-bottom 0.3s,
+        box-shadow 0.3s;
 }
 
 .nav-logo {
-    font-size: 22px;
-    font-weight: 900;
-    font-style: italic;
-    text-transform: uppercase;
+    font-size: 21px;
+    font-weight: 700;
+    color: var(--text-color);
+    letter-spacing: -0.5px;
+}
+
+.nav-logo span {
+    color: var(--primary-color);
 }
 
 .nav-links {
     display: flex;
-    gap: 15px;
+    gap: 24px;
     align-items: center;
 }
 
-.nav-btn {
-    background: var(--accent-color);
-    color: #000;
-    font-weight: 800;
-    padding: 8px 15px;
-    border: none;
-    text-transform: uppercase;
+.nav-link {
+    font-size: 14px;
+    color: var(--text-muted);
+    cursor: pointer;
+    font-weight: 500;
+    transition: color 0.2s;
 }
 
-/* Mobile: Hide some nav links if needed */
-@media (max-width: 600px) {
-    .nav-links {
-        gap: 10px;
-    }
-    .nav-link {
-        display: none;
-    }
+.nav-link:hover {
+    color: var(--primary-color);
+}
+
+.nav-btn {
+    font-size: 13px;
+    background: var(--primary-color);
+    color: #ffffff;
+    border: none;
+    border-radius: 8px;
+    padding: 8px 18px;
+    cursor: pointer;
+    font-weight: 600;
+    box-shadow: 0 4px 15px rgba(59, 125, 232, 0.2);
+    transition: all 0.2s;
+}
+
+.nav-btn:hover {
+    background: var(--primary-hover);
+    transform: translateY(-1px);
+    box-shadow: 0 6px 20px rgba(59, 125, 232, 0.3);
 }
 
 /* ================================
-   HERO (MOBILE RESPONSIVE)
+   HERO / BÚSQUEDA
 ================================ */
 .hero {
-    padding: 40px 20px;
-    border-bottom: 1px solid var(--border-color);
+    padding: 48px 28px 36px;
+    background: rgba(255, 255, 255, 0.12);
+    border-bottom: 1px solid var(--glass-border);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+}
+
+body.dark .hero {
+    background: rgba(0, 0, 0, 0.05);
 }
 
 .hero h1 {
-    font-size: 32px;
-    font-style: italic;
-    text-transform: uppercase;
-    margin-bottom: 10px;
+    font-size: 28px;
+    font-weight: 700;
+    color: var(--text-color);
+    margin-bottom: 8px;
+    letter-spacing: -0.5px;
+}
+
+.hero p {
+    font-size: 14px;
+    color: var(--text-muted);
+    margin-bottom: 24px;
 }
 
 .search-bar {
-    flex-direction: column;
-    gap: 10px;
-    width: 100%;
-}
-
-@media (min-width: 600px) {
-    .search-bar {
-        flex-direction: row;
-    }
+    display: flex;
+    gap: 12px;
+    align-items: center;
+    max-width: 600px;
 }
 
 .search-input {
-    background: #000;
-    border: 1px solid var(--border-color);
-    color: white;
-    padding: 12px;
-    width: 100%;
+    flex: 1;
+    padding: 11px 16px;
+    border: 1px solid var(--input-border);
+    border-radius: 10px;
+    font-size: 14px;
+    background: var(--input-bg);
+    color: var(--text-color);
+    outline: none;
+    backdrop-filter: var(--glass-blur);
+    -webkit-backdrop-filter: var(--glass-blur);
+    transition: all 0.2s;
+}
+
+.search-input::placeholder {
+    color: var(--text-muted);
+    opacity: 0.7;
+}
+
+.search-input:focus {
+    border-color: var(--primary-color);
+    background: var(--card-bg);
+    box-shadow: 0 0 0 3px rgba(59, 125, 232, 0.15);
+}
+
+.search-btn {
+    padding: 11px 22px;
+    background: var(--primary-color);
+    color: #ffffff;
+    border: none;
+    border-radius: 10px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    box-shadow: 0 4px 15px rgba(59, 125, 232, 0.2);
+    transition: all 0.2s;
+}
+
+.search-btn:hover {
+    background: var(--primary-hover);
+    transform: translateY(-1px);
+    box-shadow: 0 6px 20px rgba(59, 125, 232, 0.3);
 }
 
 /* ================================
-   MAIN LAYOUT (MOBILE RESPONSIVE)
+   FILTROS
+================================ */
+.filters {
+    display: flex;
+    gap: 8px;
+    margin-top: 20px;
+    flex-wrap: wrap;
+}
+
+.filter-chip {
+    padding: 6px 16px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 500;
+    cursor: pointer;
+    border: 1px solid var(--glass-border);
+    background: var(--chip-bg);
+    color: var(--text-muted);
+    backdrop-filter: var(--glass-blur);
+    -webkit-backdrop-filter: var(--glass-blur);
+    transition: all 0.2s;
+}
+
+.filter-chip:hover {
+    border-color: var(--primary-color);
+    color: var(--primary-color);
+    transform: translateY(-1px);
+}
+
+.filter-chip.active {
+    background: var(--chip-active-bg);
+    color: var(--chip-active-color);
+    border-color: var(--chip-active-bg);
+    box-shadow: 0 4px 12px rgba(59, 125, 232, 0.25);
+    font-weight: 600;
+}
+
+/* ================================
+   LAYOUT PRINCIPAL
 ================================ */
 .content {
     display: flex;
-    flex-direction: column;
-}
-
-@media (min-width: 768px) {
-    .content {
-        flex-direction: row;
-    }
-}
-
-.sidebar {
-    width: 100%;
-    padding: 20px;
-    background: #111;
-    border-bottom: 1px solid var(--border-color);
-}
-
-@media (min-width: 768px) {
-    .sidebar {
-        width: 250px;
-        border-bottom: none;
-        border-right: 1px solid var(--border-color);
-    }
-}
-
-.grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
-    gap: 15px;
-    padding: 20px;
+    position: relative;
 }
 
 /* ================================
-   CARD STYLE (NIKE TECH)
+   SIDEBAR
+================================ */
+.sidebar {
+    width: 230px;
+    min-width: 230px;
+    padding: 24px 18px;
+    border-right: 1px solid var(--glass-border);
+    background: var(--glass-bg);
+    backdrop-filter: var(--glass-blur);
+    -webkit-backdrop-filter: var(--glass-blur);
+    min-height: calc(100vh - 68px);
+    transition:
+        background 0.3s,
+        border-right 0.3s;
+}
+
+.sidebar h3 {
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 12px;
+    opacity: 0.8;
+}
+
+.sidebar-section-title {
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-top: 28px;
+    margin-bottom: 12px;
+    opacity: 0.8;
+}
+
+.sidebar-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 8px 12px;
+    border-radius: 8px;
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--text-muted);
+    cursor: pointer;
+    margin-bottom: 4px;
+    transition: all 0.2s;
+}
+
+.sidebar-item:hover {
+    background: var(--sidebar-item-hover);
+    color: var(--text-color);
+    padding-left: 15px;
+}
+
+.sidebar-item.active {
+    background: var(--primary-color);
+    color: #ffffff;
+    box-shadow: 0 4px 12px rgba(59, 125, 232, 0.2);
+}
+
+.sidebar-item.active .badge {
+    background: rgba(255, 255, 255, 0.2);
+    color: #ffffff;
+}
+
+.sidebar-item i {
+    font-size: 16px;
+}
+
+/* Sidebar item active style for sorting */
+.sidebar-item.active-sort {
+    background: var(--sidebar-item-hover);
+    color: var(--primary-color);
+    font-weight: 600;
+}
+
+.badge {
+    font-size: 11px;
+    margin-left: auto;
+    background: var(--badge-bg);
+    color: var(--badge-color);
+    padding: 1px 8px;
+    border-radius: 10px;
+    font-weight: 600;
+    transition: all 0.2s;
+}
+
+/* ================================
+   SECCIÓN PRINCIPAL
+================================ */
+.main {
+    flex: 1;
+    padding: 12px 12px 40px;
+    background: rgba(255, 255, 255, 0.02);
+}
+
+.section-header {
+    padding: 16px 20px 12px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.section-title {
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--text-color);
+}
+
+.see-all {
+    font-size: 12px;
+    color: var(--primary-color);
+    cursor: pointer;
+    font-weight: 600;
+}
+
+.see-all:hover {
+    text-decoration: underline;
+}
+
+/* ================================
+   GRID DE TARJETAS
+================================ */
+.grid {
+    padding: 8px 20px;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    gap: 18px;
+}
+
+/* ================================
+   TARJETA DE WIDGET (GLASS)
 ================================ */
 .widget-card {
     background: var(--card-bg);
-    border: 1px solid var(--border-color);
-    padding: 10px;
+    border: 1px solid var(--card-border);
+    border-radius: 14px;
+    overflow: hidden;
+    cursor: pointer;
+    backdrop-filter: var(--glass-blur);
+    -webkit-backdrop-filter: var(--glass-blur);
+    box-shadow: var(--glass-shadow);
+    transition:
+        border-color 0.25s,
+        box-shadow 0.25s,
+        transform 0.25s;
 }
 
 .widget-card:hover {
-    border-color: var(--accent-color);
+    border-color: var(--primary-color);
+    box-shadow: 0 12px 28px rgba(59, 125, 232, 0.15);
+    transform: translateY(-5px);
 }
 
+/* ================================
+   VISTA PREVIA DEL WIDGET
+================================ */
 .widget-preview {
-    background: #1a1a1a;
-    height: 100px;
+    height: 120px;
+    background: var(--widget-preview-bg);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-bottom: 1px solid var(--glass-border);
+    transition: background 0.3s;
+}
+
+/* Teléfono base */
+.phone-frame {
+    width: 68px;
+    height: 98px;
+    border: 2px solid #555;
+    border-radius: 11px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 3px;
+    overflow: hidden;
+    padding: 6px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+}
+
+.phone-dark-blue {
+    background: #1a1a2e;
+}
+.phone-dark {
+    background: #0d1117;
+}
+.phone-warm {
+    background: #1c1410;
+}
+.phone-black {
+    background: #0f0f0f;
+}
+
+/* Contenido teléfono 1 - reloj */
+.widget-time {
+    font-size: 13px;
+    font-weight: 600;
+    color: #e0e0ff;
+}
+
+.widget-date {
+    font-size: 7px;
+    color: #9090c0;
+}
+
+.widget-bar {
+    width: 44px;
+    height: 3px;
+    background: #4444aa;
+    border-radius: 2px;
+}
+
+/* Contenido teléfono 2 - salud */
+.circle-widget {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.circle-ring {
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    border: 3px solid #22c55e;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 8px;
+    color: #22c55e;
+    font-weight: 600;
+}
+
+.phone-label {
+    font-size: 7px;
+    color: #888;
+}
+
+.phone-label.small {
+    font-size: 6px;
+    color: #666;
+}
+
+/* Contenido teléfono 3 - clima */
+.weather-icon {
+    font-size: 14px;
+}
+.weather-temp {
+    font-size: 20px;
+    font-weight: 300;
+    color: #fbbf24;
+}
+.weather-desc {
+    font-size: 6px;
+    color: #888;
+    text-align: center;
+}
+
+/* Contenido teléfono 4 - música */
+.music-song {
+    font-size: 7px;
+    color: #ffffff;
+    font-weight: 600;
+    text-align: center;
+}
+.music-artist {
+    font-size: 6px;
+    color: #888;
+}
+
+.music-progress {
+    width: 44px;
+    height: 2px;
+    background: #333;
+    border-radius: 2px;
+    margin: 2px 0;
+}
+
+.music-progress-fill {
+    width: 55%;
+    height: 100%;
+    background: #1db954;
+    border-radius: 2px;
+}
+
+.music-controls {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    font-size: 10px;
+    color: #aaa;
+}
+
+.music-play {
+    font-size: 13px;
+    color: #1db954;
+}
+
+/* ================================
+   INFO DE LA TARJETA
+================================ */
+.widget-info {
+    padding: 12px 14px;
+}
+
+.widget-title {
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--text-color);
+    margin-bottom: 6px;
+}
+
+.widget-meta {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 8px;
+}
+
+.creator-name {
+    font-size: 11px;
+    color: var(--primary-color);
+    font-weight: 600;
+}
+
+.widget-stats {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+}
+
+.stat {
+    font-size: 11px;
+    color: var(--text-muted);
+    display: flex;
+    align-items: center;
+    gap: 2px;
+}
+
+.stat i {
+    font-size: 11px;
+}
+
+.tag {
+    display: inline-block;
+    font-size: 10px;
+    padding: 2px 10px;
+    background: var(--tag-bg);
+    color: var(--tag-color);
+    border-radius: 12px;
+    font-weight: 600;
+}
+
+/* ================================
+   DARK MODE TOGGLE BUTTON
+================================ */
+.icon-btn {
+    background: var(--chip-bg);
+    border: 1px solid var(--glass-border);
+    border-radius: 10px;
+    padding: 8px 12px;
+    cursor: pointer;
+    font-size: 16px;
+    color: var(--text-muted);
+    display: flex;
+    align-items: center;
+    backdrop-filter: var(--glass-blur);
+    -webkit-backdrop-filter: var(--glass-blur);
+    transition: all 0.2s;
+}
+
+.icon-btn:hover {
+    background: var(--sidebar-item-hover);
+    color: var(--text-color);
+    transform: translateY(-1px);
+}
+
+/* ================================
+   ANIMACIONES HOVER EN TARJETAS
+================================ */
+.widget-card.card-clicked {
+    transform: scale(0.96);
+    transition: transform 0.1s;
+}
+
+/* ================================
+   ESTADO VACÍO
+================================ */
+.empty-state {
+    grid-column: 1 / -1;
+    padding: 48px 20px;
+    text-align: center;
+    font-size: 14px;
+    color: var(--text-muted);
+    backdrop-filter: var(--glass-blur);
+    background: var(--card-bg);
+    border: 1px solid var(--glass-border);
+    border-radius: 14px;
+}
+
+/* ================================
+   CUSTOM SCROLLBAR
+================================ */
+::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: rgba(0, 0, 0, 0.02);
+}
+
+::-webkit-scrollbar-thumb {
+    background: rgba(0, 0, 0, 0.15);
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: rgba(0, 0, 0, 0.3);
+}
+
+body.dark ::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.01);
+}
+
+body.dark ::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.1);
+}
+
+body.dark ::-webkit-scrollbar-thumb:hover {
+    background: rgba(255, 255, 255, 0.2);
 }
