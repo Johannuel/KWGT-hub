@@ -93,7 +93,7 @@ a {
 }
 
 /* ================================
-   DECORATIVE BACKGROUND BLOBS
+   DECORATIVE BACKGROUND BLOBS (ORGANIC MOTION)
 ================================ */
 .bg-blobs {
     position: fixed;
@@ -112,8 +112,9 @@ a {
     filter: blur(140px);
     opacity: 0.38;
     transition:
-        background-color 0.5s ease,
-        opacity 0.5s ease;
+        background-color 0.8s ease,
+        opacity 0.8s ease;
+    will-change: transform;
 }
 
 .blob-1 {
@@ -122,6 +123,7 @@ a {
     width: 55vw;
     height: 55vw;
     background: radial-gradient(circle, #ff3b93 0%, rgba(255, 59, 147, 0) 70%);
+    animation: floatBlob1 28s infinite alternate ease-in-out;
 }
 
 .blob-2 {
@@ -130,6 +132,7 @@ a {
     width: 65vw;
     height: 65vw;
     background: radial-gradient(circle, #3b7de8 0%, rgba(59, 125, 232, 0) 70%);
+    animation: floatBlob2 34s infinite alternate ease-in-out;
 }
 
 .blob-3 {
@@ -138,6 +141,7 @@ a {
     width: 45vw;
     height: 45vw;
     background: radial-gradient(circle, #8b5cf6 0%, rgba(139, 92, 246, 0) 70%);
+    animation: floatBlob3 24s infinite alternate ease-in-out;
 }
 
 body.dark .blob-1 {
@@ -153,6 +157,42 @@ body.dark .blob-2 {
 body.dark .blob-3 {
     background: radial-gradient(circle, #a855f7 0%, rgba(168, 85, 247, 0) 70%);
     opacity: 0.22;
+}
+
+@keyframes floatBlob1 {
+    0% {
+        transform: translate(0, 0) scale(1) rotate(0deg);
+    }
+    50% {
+        transform: translate(7vw, 5vh) scale(1.15) rotate(120deg);
+    }
+    100% {
+        transform: translate(-3vw, -6vh) scale(0.9) rotate(240deg);
+    }
+}
+
+@keyframes floatBlob2 {
+    0% {
+        transform: translate(0, 0) scale(1) rotate(0deg);
+    }
+    50% {
+        transform: translate(-5vw, -8vh) scale(0.88) rotate(-180deg);
+    }
+    100% {
+        transform: translate(8vw, 4vh) scale(1.12) rotate(360deg);
+    }
+}
+
+@keyframes floatBlob3 {
+    0% {
+        transform: translate(0, 0) scale(1);
+    }
+    50% {
+        transform: translate(4vw, 6vh) scale(1.18);
+    }
+    100% {
+        transform: translate(-6vw, -3vh) scale(0.92);
+    }
 }
 
 /* ================================
@@ -272,7 +312,7 @@ body.dark .hero {
     outline: none;
     backdrop-filter: var(--glass-blur);
     -webkit-backdrop-filter: var(--glass-blur);
-    transition: all 0.2s;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.1);
 }
 
 .search-input::placeholder {
@@ -283,7 +323,8 @@ body.dark .hero {
 .search-input:focus {
     border-color: var(--primary-color);
     background: var(--card-bg);
-    box-shadow: 0 0 0 3px rgba(59, 125, 232, 0.15);
+    box-shadow: 0 0 0 4px rgba(59, 125, 232, 0.18);
+    transform: scale(1.015);
 }
 
 .search-btn {
@@ -299,13 +340,17 @@ body.dark .hero {
     align-items: center;
     gap: 8px;
     box-shadow: 0 4px 15px rgba(59, 125, 232, 0.2);
-    transition: all 0.2s;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
 .search-btn:hover {
     background: var(--primary-hover);
-    transform: translateY(-1px);
-    box-shadow: 0 6px 20px rgba(59, 125, 232, 0.3);
+    transform: translateY(-2px) scale(1.04);
+    box-shadow: 0 8px 24px rgba(59, 125, 232, 0.3);
+}
+
+.search-btn:active {
+    transform: translateY(0) scale(0.96);
 }
 
 /* ================================
@@ -329,21 +374,22 @@ body.dark .hero {
     color: var(--text-muted);
     backdrop-filter: var(--glass-blur);
     -webkit-backdrop-filter: var(--glass-blur);
-    transition: all 0.2s;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
 .filter-chip:hover {
     border-color: var(--primary-color);
     color: var(--primary-color);
-    transform: translateY(-1px);
+    transform: translateY(-2px) scale(1.06);
 }
 
 .filter-chip.active {
     background: var(--chip-active-bg);
     color: var(--chip-active-color);
     border-color: var(--chip-active-bg);
-    box-shadow: 0 4px 12px rgba(59, 125, 232, 0.25);
+    box-shadow: 0 6px 16px rgba(59, 125, 232, 0.3);
     font-weight: 600;
+    transform: scale(1.04);
 }
 
 /* ================================
@@ -489,9 +535,10 @@ body.dark .hero {
 }
 
 /* ================================
-   TARJETA DE WIDGET (GLASS)
+   TARJETA DE WIDGET (GLASS WITH SPRING MOTION & SHEEN)
 ================================ */
 .widget-card {
+    position: relative;
     background: var(--card-bg);
     border: 1px solid var(--card-border);
     border-radius: 14px;
@@ -501,15 +548,89 @@ body.dark .hero {
     -webkit-backdrop-filter: var(--glass-blur);
     box-shadow: var(--glass-shadow);
     transition:
-        border-color 0.25s,
-        box-shadow 0.25s,
-        transform 0.25s;
+        border-color 0.3s,
+        box-shadow 0.4s ease,
+        transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275); /* Spring curve */
+    animation: cardEntrance 0.6s cubic-bezier(0.23, 1, 0.32, 1) both;
+}
+
+/* Diagonal dynamic glass sheen sweep */
+.widget-card::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -150%;
+    width: 65%;
+    height: 100%;
+    background: linear-gradient(
+        to right,
+        rgba(255, 255, 255, 0) 0%,
+        rgba(255, 255, 255, 0.25) 50%,
+        rgba(255, 255, 255, 0) 100%
+    );
+    transform: skewX(-28deg);
+    transition: left 0.8s cubic-bezier(0.19, 1, 0.22, 1);
+    z-index: 5;
+    pointer-events: none;
+}
+
+body.dark .widget-card::before {
+    background: linear-gradient(
+        to right,
+        rgba(255, 255, 255, 0) 0%,
+        rgba(255, 255, 255, 0.12) 50%,
+        rgba(255, 255, 255, 0) 100%
+    );
 }
 
 .widget-card:hover {
     border-color: var(--primary-color);
-    box-shadow: 0 12px 28px rgba(59, 125, 232, 0.15);
-    transform: translateY(-5px);
+    box-shadow: 0 16px 36px rgba(59, 125, 232, 0.18);
+    transform: translateY(-6px) scale(1.02);
+}
+
+.widget-card:hover::before {
+    left: 150%;
+}
+
+/* Staggered entrance delays */
+.widget-card:nth-child(1) {
+    animation-delay: 0.05s;
+}
+.widget-card:nth-child(2) {
+    animation-delay: 0.1s;
+}
+.widget-card:nth-child(3) {
+    animation-delay: 0.15s;
+}
+.widget-card:nth-child(4) {
+    animation-delay: 0.2s;
+}
+.widget-card:nth-child(5) {
+    animation-delay: 0.25s;
+}
+.widget-card:nth-child(6) {
+    animation-delay: 0.3s;
+}
+.widget-card:nth-child(7) {
+    animation-delay: 0.35s;
+}
+.widget-card:nth-child(8) {
+    animation-delay: 0.4s;
+}
+.widget-card:nth-child(n + 9) {
+    animation-delay: 0.45s;
+}
+
+@keyframes cardEntrance {
+    from {
+        opacity: 0;
+        transform: translateY(24px) scale(0.95);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
 }
 
 /* ================================
@@ -738,11 +859,12 @@ body.dark .hero {
 }
 
 /* ================================
-   ANIMACIONES HOVER EN TARJETAS
+   TACTILE PUSH MICRO-INTERACTIONS
 ================================ */
 .widget-card.card-clicked {
-    transform: scale(0.96);
-    transition: transform 0.1s;
+    transform: scale(0.94) translateY(2px) !important;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05) !important;
+    transition: transform 0.12s cubic-bezier(0.25, 1, 0.5, 1) !important;
 }
 
 /* ================================
