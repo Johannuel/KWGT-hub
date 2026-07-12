@@ -3,124 +3,285 @@
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>KWGTHub</title>
-        <link rel="stylesheet" href="styles.css" />
+        <meta
+            name="description"
+            content="KWGTHub - Descubre y descarga widgets KWGT creados por la comunidad"
+        />
+        <title>KWGTHub | Widgets KWGT Gratis</title>
+
+        <!-- Google Fonts: Orelo (headings) + Evoque (body) -->
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Orelo:wght@400;500;700&family=Evoque:wght@400;500;700&display=swap"
+            rel="stylesheet"
+        />
+
+        <!-- Tabler Icons -->
         <link
             rel="stylesheet"
             href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css"
         />
+
+        <link rel="stylesheet" href="styles.css" />
     </head>
     <body>
-        <!-- DECORATIVE BACKGROUND BLOBS FOR GLASSMORPHISM -->
-        <div class="bg-blobs">
+        <!-- DECORATIVE BACKGROUND BLOBS -->
+        <div class="bg-blobs" aria-hidden="true">
             <div class="blob blob-1"></div>
             <div class="blob blob-2"></div>
             <div class="blob blob-3"></div>
         </div>
 
         <!-- NAVBAR -->
-        <nav class="nav">
+        <nav class="nav" role="navigation" aria-label="Navegación principal">
             <div class="nav-logo">kwgt<span>hub</span></div>
             <div class="nav-links">
-                <a class="nav-link" href="#">Explorar</a>
-                <a class="nav-link" href="#">Creadores</a>
-                <a class="nav-link" href="#">Subir widget</a>
-                <button id="dark-toggle" class="icon-btn" title="Cambiar tema">
-                    <i class="ti ti-moon"></i>
+                <a class="nav-link" href="#explore">Explorar</a>
+                <a class="nav-link" href="#creators">Creadores</a>
+                <a class="nav-link" href="#upload">Subir widget</a>
+                <button
+                    id="dark-toggle"
+                    class="icon-btn"
+                    title="Cambiar tema"
+                    aria-label="Cambiar tema oscuro/claro"
+                    aria-pressed="false"
+                >
+                    <i class="ti ti-moon" aria-hidden="true"></i>
                 </button>
-                <button class="nav-btn">Iniciar sesión</button>
+                <button class="nav-btn" aria-label="Iniciar sesión en KWGTHub">
+                    Iniciar sesión
+                </button>
             </div>
         </nav>
 
-        <!-- BÚSQUEDA -->
-        <section class="hero">
-            <h1>Encuentra elu widget perfecto para tu pantalla</h1>
+        <!-- HERO / BÚSQUEDA -->
+        <section class="hero" id="explore">
+            <h1>Encuentra el widget perfecto para tu pantalla</h1>
             <p>
                 Miles de widgets KWGT creados por la comunidad, gratis y listos
                 para descargar.
             </p>
+
             <div class="search-bar">
+                <label for="search-input" class="sr-only">Buscar widgets</label>
                 <input
                     id="search-input"
                     class="search-input"
                     type="text"
                     placeholder="Buscar widgets... ej. reloj minimalista"
+                    aria-describedby="search-hint"
                 />
-                <button id="search-btn" class="search-btn">
-                    <i class="ti ti-search"></i> Buscar
+                <span id="search-hint" class="sr-only">
+                    Busca por nombre, creador o categoría
+                </span>
+                <button
+                    id="search-btn"
+                    class="search-btn"
+                    aria-label="Buscar widgets"
+                >
+                    <i class="ti ti-search" aria-hidden="true"></i> Buscar
                 </button>
             </div>
-            <div class="filters">
-                <div class="filter-chip active" data-category="todos">
+
+            <!-- FILTER CHIPS -->
+            <div
+                class="filters"
+                role="tablist"
+                aria-label="Filtrar por categoría"
+            >
+                <button
+                    class="filter-chip active"
+                    data-category="todos"
+                    role="tab"
+                    aria-selected="true"
+                    aria-controls="widget-grid"
+                >
                     Todos
-                </div>
-                <div class="filter-chip" data-category="reloj">Reloj</div>
-                <div class="filter-chip" data-category="calendario">
+                </button>
+                <button
+                    class="filter-chip"
+                    data-category="reloj"
+                    role="tab"
+                    aria-selected="false"
+                    aria-controls="widget-grid"
+                >
+                    Reloj
+                </button>
+                <button
+                    class="filter-chip"
+                    data-category="calendario"
+                    role="tab"
+                    aria-selected="false"
+                    aria-controls="widget-grid"
+                >
                     Calendario
-                </div>
-                <div class="filter-chip" data-category="clima">Clima</div>
-                <div class="filter-chip" data-category="musica">Música</div>
-                <div class="filter-chip" data-category="salud">Salud</div>
-                <div class="filter-chip" data-category="bateria">Batería</div>
+                </button>
+                <button
+                    class="filter-chip"
+                    data-category="clima"
+                    role="tab"
+                    aria-selected="false"
+                    aria-controls="widget-grid"
+                >
+                    Clima
+                </button>
+                <button
+                    class="filter-chip"
+                    data-category="musica"
+                    role="tab"
+                    aria-selected="false"
+                    aria-controls="widget-grid"
+                >
+                    Música
+                </button>
+                <button
+                    class="filter-chip"
+                    data-category="salud"
+                    role="tab"
+                    aria-selected="false"
+                    aria-controls="widget-grid"
+                >
+                    Salud
+                </button>
+                <button
+                    class="filter-chip"
+                    data-category="bateria"
+                    role="tab"
+                    aria-selected="false"
+                    aria-controls="widget-grid"
+                >
+                    Batería
+                </button>
             </div>
         </section>
 
-        <!-- CONTENIDO PRINCIPAL -->
+        <!-- MAIN CONTENT -->
         <div class="content">
             <!-- SIDEBAR -->
-            <aside class="sidebar">
-                <h3>Categorías</h3>
-                <div class="sidebar-item active" data-category="todos">
-                    <i class="ti ti-layout-grid"></i> Todos
-                    <span class="badge">8</span>
-                </div>
-                <div class="sidebar-item" data-category="reloj">
-                    <i class="ti ti-clock"></i> Reloj
-                    <span class="badge">1</span>
-                </div>
-                <div class="sidebar-item" data-category="calendario">
-                    <i class="ti ti-calendar"></i> Calendario
-                    <span class="badge">1</span>
-                </div>
-                <div class="sidebar-item" data-category="clima">
-                    <i class="ti ti-cloud"></i> Clima
-                    <span class="badge">2</span>
-                </div>
-                <div class="sidebar-item" data-category="musica">
-                    <i class="ti ti-music"></i> Música
-                    <span class="badge">2</span>
-                </div>
-                <div class="sidebar-item" data-category="salud">
-                    <i class="ti ti-activity"></i> Salud
-                    <span class="badge">1</span>
-                </div>
-                <div class="sidebar-item" data-category="bateria">
-                    <i class="ti ti-battery"></i> Batería
-                    <span class="badge">1</span>
-                </div>
+            <aside class="sidebar" aria-label="Filtros y ordenamiento">
+                <section class="sidebar-section">
+                    <h2>Categorías</h2>
+                    <div
+                        class="sidebar-items"
+                        role="group"
+                        aria-label="Categorías disponibles"
+                    >
+                        <button
+                            class="sidebar-item active"
+                            data-category="todos"
+                            aria-pressed="true"
+                        >
+                            <i class="ti ti-layout-grid" aria-hidden="true"></i>
+                            Todos
+                            <span
+                                class="badge"
+                                aria-label="8 widgets disponibles"
+                                >8</span
+                            >
+                        </button>
+                        <button
+                            class="sidebar-item"
+                            data-category="reloj"
+                            aria-pressed="false"
+                        >
+                            <i class="ti ti-clock" aria-hidden="true"></i> Reloj
+                            <span class="badge">1</span>
+                        </button>
+                        <button
+                            class="sidebar-item"
+                            data-category="calendario"
+                            aria-pressed="false"
+                        >
+                            <i class="ti ti-calendar" aria-hidden="true"></i>
+                            Calendario
+                            <span class="badge">1</span>
+                        </button>
+                        <button
+                            class="sidebar-item"
+                            data-category="clima"
+                            aria-pressed="false"
+                        >
+                            <i class="ti ti-cloud" aria-hidden="true"></i> Clima
+                            <span class="badge">2</span>
+                        </button>
+                        <button
+                            class="sidebar-item"
+                            data-category="musica"
+                            aria-pressed="false"
+                        >
+                            <i class="ti ti-music" aria-hidden="true"></i>
+                            Música
+                            <span class="badge">2</span>
+                        </button>
+                        <button
+                            class="sidebar-item"
+                            data-category="salud"
+                            aria-pressed="false"
+                        >
+                            <i class="ti ti-activity" aria-hidden="true"></i>
+                            Salud
+                            <span class="badge">1</span>
+                        </button>
+                        <button
+                            class="sidebar-item"
+                            data-category="bateria"
+                            aria-pressed="false"
+                        >
+                            <i class="ti ti-battery" aria-hidden="true"></i>
+                            Batería
+                            <span class="badge">1</span>
+                        </button>
+                    </div>
+                </section>
 
-                <h3 class="sidebar-section-title">Ordenar por</h3>
-                <div class="sidebar-item active-sort">
-                    <i class="ti ti-flame"></i> Populares
-                </div>
-                <div class="sidebar-item">
-                    <i class="ti ti-clock"></i> Recientes
-                </div>
-                <div class="sidebar-item">
-                    <i class="ti ti-download"></i> Más descargados
-                </div>
+                <section class="sidebar-section">
+                    <h2>Ordenar por</h2>
+                    <div
+                        class="sidebar-items"
+                        role="group"
+                        aria-label="Opciones de ordenamiento"
+                    >
+                        <button
+                            class="sidebar-item active-sort"
+                            aria-pressed="true"
+                        >
+                            <i class="ti ti-flame" aria-hidden="true"></i>
+                            Populares
+                        </button>
+                        <button class="sidebar-item" aria-pressed="false">
+                            <i class="ti ti-clock" aria-hidden="true"></i>
+                            Recientes
+                        </button>
+                        <button class="sidebar-item" aria-pressed="false">
+                            <i class="ti ti-download" aria-hidden="true"></i>
+                            Más descargados
+                        </button>
+                    </div>
+                </section>
             </aside>
 
-            <!-- GRID -->
+            <!-- MAIN GRID -->
             <main class="main">
                 <div class="section-header">
-                    <span class="section-title">Populares esta semana</span>
-                    <span class="see-all">Ver todos</span>
+                    <h2 class="section-title">Populares esta semana</h2>
+                    <a
+                        href="#"
+                        class="see-all"
+                        aria-label="Ver todos los widgets populares"
+                        >Ver todos</a
+                    >
                 </div>
-                <div class="grid" id="widget-grid"></div>
+                <div
+                    class="grid"
+                    id="widget-grid"
+                    role="region"
+                    aria-label="Grid de widgets"
+                ></div>
             </main>
         </div>
 
+        <!-- SCRIPT -->
         <script src="app.js"></script>
     </body>
 </html>
