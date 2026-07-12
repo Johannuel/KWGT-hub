@@ -1,4 +1,6 @@
-// DATOS DE WIDGETS (simulados)
+// ================================
+// DATOS DE WIDGETS
+// ================================
 const widgets = [
   {
     id: 1,
@@ -82,11 +84,9 @@ const widgets = [
   },
 ];
 
-// ESTADO DE LA APP
-let activeCategory = "todos";
-let searchQuery = "";
-
-// PREVIEWS HTML POR TIPO
+// ================================
+// PREVIEW HTML POR TIPO
+// ================================
 const previews = {
   "preview-clock": `
     <div class="phone-frame phone-dark-blue">
@@ -123,146 +123,269 @@ const previews = {
     </div>`,
 };
 
-// RENDERIZAR targetas
+// ================================
+// STATE MANAGEMENT
+// ================================
+class AppState {
+  constructor() {
+    this.activeCategory = "todos";
+    this.searchQuery = "";
+  }
+
+  setCategory(category) {
+    this.activeCategory = category;
+  }
+
+  setSearchQuery(query) {
+    this.searchQuery = query;
+  }
+
+  getFiltered() {
+    let result = widgets;
+
+    if (this.activeCategory !== "todos") {
+      result = result.filter((w) => w.category === this.activeCategory);
+    }
+
+    if (this.searchQuery.trim() !== "") {
+      const q = this.searchQuery.toLowerCase();
+      result = result.filter(
+        (w) =>
+          w.title.toLowerCase().includes(q) ||
+          w.creator.toLowerCase().includes(q) ||
+          w.tag.toLowerCase().includes(q),
+      );
+    }
+
+    return result;
+  }
+}
+
+const appState = new AppState();
+
+// ================================
+// RENDER LOGIC
+// ================================
 function renderWidgets(list) {
   const grid = document.getElementById("widget-grid");
 
+  if (!grid) return;
+
   if (list.length === 0) {
-    grid.innerHTML = `<div class="empty-state">No se encontraron widgets para "<strong>${searchQuery}</strong>"</div>`;
+    grid.innerHTML = `
+      <div class="empty-state">
+        No se encontraron widgets para "<strong>${appState.searchQuery}</strong>"
+      </div>
+    `;
     return;
   }
 
   grid.innerHTML = list
     .map(
       (w) => `
-    <div class="widget-card" data-id="${w.id}">
+    <article class="widget-card" data-id="${w.id}" tabindex="0" role="button">
       <div class="widget-preview">
         ${previews[w.previewClass]}
       </div>
       <div class="widget-info">
-        <div class="widget-title">${w.title}</div>
+        <h3 class="widget-title">${escapeHtml(w.title)}</h3>
         <div class="widget-meta">
-          <span class="creator-name">${w.creator}</span>
+          <span class="creator-name">${escapeHtml(w.creator)}</span>
           <div class="widget-stats">
-            <span class="stat"><i class="ti ti-download"></i> ${w.downloads}</span>
-            <span class="stat"><i class="ti ti-heart"></i> ${w.likes}</span>
+            <span class="stat" title="${w.downloads} descargas">
+              <i class="ti ti-download" aria-hidden="true"></i> ${w.downloads}
+            </span>
+            <span class="stat" title="${w.likes} likes">
+              <i class="ti ti-heart" aria-hidden="true"></i> ${w.likes}
+            </span>
           </div>
         </div>
-        <span class="tag">${w.tag}</span>
+        <span class="tag">${escapeHtml(w.tag)}</span>
       </div>
-    </div>
+    </article>
   `,
     )
     .join("");
+
+  attachCardListeners();
 }
 
-function filterWidgets() {
-  let result = widgets;
-
-  if (activeCategory !== "todos") {
-    result = result.filter((w) => w.category === activeCategory);
-  }
-
-  if (searchQuery.trim() !== "") {
-    const q = searchQuery.toLowerCase();
-    result = result.filter(
-      (w) =>
-        w.title.toLowerCase().includes(q) ||
-        w.creator.toLowerCase().includes(q) ||
-        w.tag.toLowerCase().includes(q),
-    );
-  }
-
-  renderWidgets(result);
+function attachCardListeners() {
+  document.querySelectorAll(".widget-card").forEach((card) => {
+    card.addEventListener("click", handleCardClick);
+    card.addEventListener("keydown", handleCardKeydown);
+  });
 }
 
-// BÚSQUEDA
+function handleCardClick(e) {
+  const card = e.currentTarget;
+  card.classList.add("card-clicked");
+  setTimeout(() => card.classList.remove("card-clicked"), 300);
+}
 
+function handleCardKeydown(e) {
+  if (e.key === "Enter" || e.key === " ") {
+    e.preventDefault();
+    handleCardClick(e);
+  }
+}
+
+function updateView() {
+  renderWidgets(appState.getFiltered());
+}
+
+// ================================
+// UTILITY
+// ================================
+function escapeHtml(text) {
+  const map = {
+    "&": "&amp;",
+    "<": "&lt;",
+    ">": "&gt;",
+    '"': "&quot;",
+    "'": "&#039;",
+  };
+  return text.replace(/[&<>"']/g, (m) => map[m]);
+}
+
+// ================================
+// EVENT HANDLERS
+// ================================
+
+// Search
 const searchInput = document.getElementById("search-input");
 const searchBtn = document.getElementById("search-btn");
 
-searchInput.addEventListener("input", (e) => {
-  searchQuery = e.target.value;
-  filterWidgets();
-});
+if (searchInput) {
+  searchInput.addEventListener("input", (e) => {
+    appState.setSearchQuery(e.target.value);
+    updateView();
+  });
 
-searchBtn.addEventListener("click", () => {
-  searchQuery = searchInput.value;
-  filterWidgets();
-});
+  searchInput.addEventListener("keydown", (e) => {
+    if (e.key === "Enter") {
+      e.preventDefault();
+      appState.setSearchQuery(searchInput.value);
+      updateView();
+    }
+  });
+}
 
-searchInput.addEventListener("keydown", (e) => {
-  if (e.key === "Enter") {
-    searchQuery = searchInput.value;
-    filterWidgets();
-  }
-});
+if (searchBtn) {
+  searchBtn.addEventListener("click", () => {
+    appState.setSearchQuery(searchInput.value);
+    updateView();
+  });
+}
 
-// Filtros chips en el hero
-
+// Filter Chips (en el hero)
 const filterChips = document.querySelectorAll(".filter-chip");
 
 filterChips.forEach((chip) => {
   chip.addEventListener("click", () => {
-    filterChips.forEach((c) => c.classList.remove("active"));
-    chip.classList.add("active");
-    activeCategory = chip.dataset.category;
-    syncSidebar(activeCategory);
-    filterWidgets();
+    const category = chip.dataset.category;
+    setActiveTab("filter-chip", chip);
+    appState.setCategory(category);
+    syncSidebar(category);
+    updateView();
+  });
+
+  // Keyboard navigation
+  chip.addEventListener("keydown", (e) => {
+    if (e.key === "ArrowRight" || e.key === "ArrowLeft") {
+      e.preventDefault();
+      const siblings = Array.from(filterChips);
+      const currentIndex = siblings.indexOf(chip);
+      const direction = e.key === "ArrowRight" ? 1 : -1;
+      const nextIndex =
+        (currentIndex + direction + siblings.length) % siblings.length;
+      siblings[nextIndex].focus();
+      siblings[nextIndex].click();
+    }
   });
 });
 
-// Sidebar
-
+// Sidebar Items (categorías)
 const sidebarItems = document.querySelectorAll(".sidebar-item[data-category]");
 
 sidebarItems.forEach((item) => {
   item.addEventListener("click", () => {
-    sidebarItems.forEach((i) => i.classList.remove("active"));
-    item.classList.add("active");
-    activeCategory = item.dataset.category;
-    syncChips(activeCategory);
-    filterWidgets();
+    const category = item.dataset.category;
+    setActiveTab("sidebar-item", item);
+    appState.setCategory(category);
+    syncChips(category);
+    updateView();
+  });
+
+  item.addEventListener("keydown", (e) => {
+    if (e.key === " " || e.key === "Enter") {
+      e.preventDefault();
+      item.click();
+    }
   });
 });
 
+// Sync sidebar cuando se cambia desde chips
 function syncSidebar(category) {
-  sidebarItems.forEach((i) => {
-    i.classList.toggle("active", i.dataset.category === category);
+  sidebarItems.forEach((item) => {
+    const isActive = item.dataset.category === category;
+    item.classList.toggle("active", isActive);
+    item.setAttribute("aria-pressed", isActive.toString());
   });
 }
 
+// Sync chips cuando se cambia desde sidebar
 function syncChips(category) {
-  filterChips.forEach((c) => {
-    c.classList.toggle("active", c.dataset.category === category);
+  filterChips.forEach((chip) => {
+    const isActive = chip.dataset.category === category;
+    chip.classList.toggle("active", isActive);
+    chip.setAttribute("aria-selected", isActive.toString());
   });
 }
 
-// DARK MODE
-const darkToggle = document.getElementById("dark-toggle");
-const icon = darkToggle.querySelector("i");
-
-darkToggle.addEventListener("click", () => {
-  document.body.classList.toggle("dark");
-  const isDark = document.body.classList.contains("dark");
-  icon.className = isDark ? "ti ti-sun" : "ti ti-moon";
-  localStorage.setItem("theme", isDark ? "dark" : "light");
-});
-
-// Recordar preferencia
-if (localStorage.getItem("theme") === "dark") {
-  document.body.classList.add("dark");
-  icon.className = "ti ti-sun";
+// Helper para establecer tab activo
+function setActiveTab(selector, activeElement) {
+  document.querySelectorAll(selector).forEach((el) => {
+    el.classList.remove("active");
+  });
+  activeElement.classList.add("active");
 }
 
-// ANIMACIONES HOVER EN TARJETAS
-// (se aplican via CSS, aquí manejamos el click)
-document.getElementById("widget-grid").addEventListener("click", (e) => {
-  const card = e.target.closest(".widget-card");
-  if (!card) return;
-  card.classList.add("card-clicked");
-  setTimeout(() => card.classList.remove("card-clicked"), 300);
-});
+// ================================
+// DARK MODE
+// ================================
+const darkToggle = document.getElementById("dark-toggle");
+const icon = darkToggle?.querySelector("i");
 
-// INIT
-renderWidgets(widgets);
+if (darkToggle) {
+  darkToggle.addEventListener("click", () => {
+    document.body.classList.toggle("dark");
+    const isDark = document.body.classList.contains("dark");
+
+    if (icon) {
+      icon.className = isDark ? "ti ti-sun" : "ti ti-moon";
+    }
+
+    darkToggle.setAttribute("aria-pressed", isDark.toString());
+    localStorage.setItem("theme", isDark ? "dark" : "light");
+  });
+
+  // Restore preference
+  if (localStorage.getItem("theme") === "dark") {
+    document.body.classList.add("dark");
+    if (icon) {
+      icon.className = "ti ti-sun";
+    }
+    darkToggle.setAttribute("aria-pressed", "true");
+  }
+}
+
+// ================================
+// INITIALIZATION
+// ================================
+document.addEventListener("DOMContentLoaded", () => {
+  updateView();
+
+  // Log para debugging (remover en producción)
+  console.log("KWGTHub loaded. Widgets:", widgets.length);
+});
